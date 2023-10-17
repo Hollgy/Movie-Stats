@@ -26,6 +26,8 @@ export function getMonthConfig(documentaries, specials, featureFilms) {
 
     const uniqueMonth = Object.keys(premiereCount).map(month => Number(month))
     const monthCountsArray = uniqueMonth.map(month => premiereCount[month])
+    monthCountsArray.sort((a, b) => b - a)
+
 
     return {
         labels: uniqueMonth.map(month => (new Date(0, month)).toLocaleString('default', { month: 'short' })),
@@ -54,6 +56,8 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
 
     const uniqueRuntime = Object.keys(runtimeCount)
     const runtimeCountsArray = uniqueRuntime.map(runtime => runtimeCount[runtime])
+    
+    
 
     return {
         labels: uniqueRuntime,
@@ -106,6 +110,8 @@ export function getGenreConfig(documentaries, specials, featureFilms) {
 
     const uniqueGenre = Object.keys(genreCount)
     const genreCountsArray = uniqueGenre.map(genre => genreCount[genre])
+    genreCountsArray.sort((a, b) => b - a)
+    
 
     return {
         labels: uniqueGenre,

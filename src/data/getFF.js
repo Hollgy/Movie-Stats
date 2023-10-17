@@ -32,6 +32,7 @@ export function getFFConfig() {
 
     const uniqueLanguages = Object.keys(languagueCount)
     const languageCountsArray = uniqueLanguages.map(language => languagueCount[language])
+    languageCountsArray.sort((a, b) => b - a)
 
     return {
         labels: uniqueLanguages,
