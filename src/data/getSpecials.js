@@ -1,16 +1,30 @@
 
 import data from './specials.json'
 
-const colors = ['#F6EEE5', '#C0856B', '#801316', '#B69885', '#8FD89F']
+const colors = [
+    '#FF5733',
+    '#FFD700',
+    '#FFA500',
+    '#008000',
+    '#4682B4',
+    '#800080',
+    '#9370DB',
+    '#66CDAA',
+    '#FF69B4',
+    '#8A2BE2',
+    '#5F9EA0',
+    '#CD5C5C'
+];
+
 
 export function getSpecialsConfig() {
-    console.log('Specials movie data', data);
+    // console.log('Specials movie data', data);
 
     const languagueCount = []
 
-    data.forEach(obj => {
-        const language = obj.Language
-        if (languagueCount[language]){
+    data.forEach(movie => {
+        const language = movie.Language
+        if (languagueCount[language]) {
             languagueCount[language]++
         } else {
             languagueCount[language] = 1
@@ -18,7 +32,7 @@ export function getSpecialsConfig() {
     })
 
     const uniqueLanguages = Object.keys(languagueCount)
-    const languageCountsArray  = uniqueLanguages.map(language => languagueCount[language])
+    const languageCountsArray = uniqueLanguages.map(language => languagueCount[language])
 
     return {
         labels: uniqueLanguages,

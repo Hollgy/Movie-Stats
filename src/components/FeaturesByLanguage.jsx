@@ -9,7 +9,7 @@ const FFConfig = getFFConfig()
 const FeaturesByLanguage = () => {
     return(
         <section>
-            <h2>Documentaries by Language</h2>
+            <h2>Feature-Films by Language</h2>
             <Pie data={FFConfig} />
         </section>
     )

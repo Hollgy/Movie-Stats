@@ -17,12 +17,12 @@ const colors = [
 ];
 
 export function getFFConfig() {
-    console.log('FF movie data', data);
+    // console.log('FF movie data', data);
 
     const languagueCount = []
 
-    data.forEach(obj => {
-        const language = obj.Language
+    data.forEach(movie => {
+        const language = movie.Language
         if (languagueCount[language]) {
             languagueCount[language]++
         } else {

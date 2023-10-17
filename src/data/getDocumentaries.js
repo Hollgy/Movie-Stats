@@ -1,15 +1,27 @@
 import data from './documentaries.json'
 
-const colors = ['#FF5733', '#4A90E2', '#D68AFF', '#1BC5A2', '#F2910D', '#6D4C00']
-
+const colors = [
+    '#FF5733',
+    '#FFD700',
+    '#FFA500',
+    '#008000',
+    '#4682B4',
+    '#800080',
+    '#9370DB',
+    '#66CDAA',
+    '#FF69B4',
+    '#8A2BE2',
+    '#5F9EA0',
+    '#CD5C5C'
+];
 
 export function getDocumentariesConfig() {
-    console.log('Documentaries movie data', data);
+    // console.log('Documentaries movie data', data);
 
     const languagueCount = []
 
-    data.forEach(obj => {
-        const language = obj.Language
+    data.forEach(movie => {
+        const language = movie.Language
         if (languagueCount[language]) {
             languagueCount[language]++
         } else {
