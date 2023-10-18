@@ -15,7 +15,9 @@ const colors = [
     '#5F9EA0',
     '#CD5C5C'
 ];
-
+const border = [
+    '1px solid black'
+]
 export function getFFConfig() {
     // console.log('FF movie data', data);
 
@@ -39,7 +41,12 @@ export function getFFConfig() {
         datasets: [{
             label: 'Feature-Films by languages',
             data: languageCountsArray,
-            backgroundColor: colors
-        }]
+            backgroundColor: colors,
+            borderWidth: 2,
+            font: {
+                family: 'Helvetica',
+                size: 50
+            }
+        }],
     }
 }
