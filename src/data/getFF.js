@@ -1,40 +1,26 @@
 
-import data from './feature-films.json'
+import data from './json/feature-films.json'
 
 const colors = [
-    '#FF5733',
-    '#FFD700',
-    '#FFA500',
-    '#008000',
-    '#4682B4',
-    '#800080',
-    '#9370DB',
-    '#66CDAA',
-    '#FF69B4',
-    '#8A2BE2',
-    '#5F9EA0',
-    '#CD5C5C'
+    "#FF5733", "#33FF57", "#336BFF", "#FF33A5", "#FF336B", "#57FF33", "#33FFA5", "#336BFF", "#5733FF", "#33A5FF", "#33FF6B", "#A5FF33", "#6BFF33", "#FF336B", "#33FF33", "#FFA533", "#336B33", "#FF5733", "#33A5FF", "#6B33FF"
 ];
-const border = [
-    '1px solid black'
-]
+
+
 export function getFFConfig() {
-    // console.log('FF movie data', data);
+    const languageCount = {};
+    // console.log(languageCount);
 
-    const languagueCount = []
-
-    data.forEach(movie => {
-        const language = movie.Language
-        if (languagueCount[language]) {
-            languagueCount[language]++
+    data.map(movie => {
+        const language = movie.Language;
+        if (languageCount[language]) {
+            languageCount[language]++;
         } else {
-            languagueCount[language] = 1
+            languageCount[language] = 1;
         }
-    })
+    });
 
-    const uniqueLanguages = Object.keys(languagueCount)
-    const languageCountsArray = uniqueLanguages.map(language => languagueCount[language])
-    languageCountsArray.sort((a, b) => b - a)
+    const uniqueLanguages = Object.keys(languageCount);
+    const languageCountsArray = uniqueLanguages.map(language => languageCount[language]);
 
     return {
         labels: uniqueLanguages,
@@ -43,10 +29,7 @@ export function getFFConfig() {
             data: languageCountsArray,
             backgroundColor: colors,
             borderWidth: 2,
-            font: {
-                family: 'Helvetica',
-                size: 50
-            }
+            radius: 150,
         }],
-    }
+    };
 }

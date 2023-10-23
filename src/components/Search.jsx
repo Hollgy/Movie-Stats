@@ -1,59 +1,54 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import documentariesData from "../data/json/documentaries.json";
+import specialsData from "../data/json/specials.json";
+import featureData from "../data/json/feature-films.json";
+import '../styles/MoviesBySearch.css';
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
-import { Bar } from 'react-chartjs-2'
-ChartJS.register(ArcElement, BarElement, LinearScale, CategoryScale, Tooltip, Legend);
-
-import documentariesData from "../data/documentaries.json"
-import specialsData from "../data/specials.json"
-import featureData from "../data/feature-films.json"
-
-import { searchConfig } from '../data/getAll';
-
-const documentaries = Array.isArray(documentariesData) ? documentariesData : [];
-const specials = Array.isArray(specialsData) ? specialsData : [];
-const featureFilms = Array.isArray(featureData) ? featureData : [];
 
 const MoviesBySearch = () => {
-    const [searchTerm, setSearchTerm] = useState('')
+    const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [filteredMovies, setFilteredMovies] = useState([])
-
+    const [filteredMovies, setFilteredMovies] = useState([]);
     const allData = [...documentariesData, ...specialsData, ...featureData];
-
 
     const handleSearch = () => {
         const filteredMovies = allData.filter((movie) =>
-            movie.Title.toLowerCase().includes(searchTerm.toLowerCase()))
-        setSearchResults(filteredMovies)
-        setFilteredMovies(filteredMovies)
-    }
+            movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchResults(filteredMovies);
+        setFilteredMovies(filteredMovies);
+    };
+
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+        handleSearch();
+    };
+
 
     return (
         <section>
-            <h2>Search Results</h2>
-            <input type="text"
+            <input
+                type="text"
                 placeholder='Search for a Movie'
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)} />
-            <button onClick={handleSearch}>Search</button>
-            <div>
-                <ul>{searchTerm !== "" &&
+                onChange={handleChange}
+            />
+            <ul className='text'>
+                {searchTerm !== "" &&
                     searchResults.map((movie) => (
                         <li key={movie.Title}>{movie.Title}</li>
                     ))}
-                </ul>
-                {filteredMovies.length === 1 &&
-                    filteredMovies.map((movie) => (
-                        <ul key={movie.Title}>
-                            <li>Duration:{movie.Runtime}</li>
-                            <li>Released:{movie.Premiere}</li>
-                            <li>Language:{movie.Language}</li>
-                        </ul>
-                    ))}
-            </div>
-        </section >
-    )
-}
+            </ul>
+            {filteredMovies.length === 1 &&
+                filteredMovies.map((movie) => (
+                    <ul className='text' key={movie.Title}>
+                        <li>Duration: {movie.Runtime}</li>
+                        <li>Released: {movie.Premiere}</li>
+                        <li>Language: {movie.Language}</li>
+                    </ul>
+                ))}
+        </section>
+    );
+};
 
-export default MoviesBySearch
+export default MoviesBySearch;

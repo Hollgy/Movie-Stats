@@ -11,12 +11,19 @@ p {
     color: white;
 }
 
+h2{
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #FFF83F;
+}
+
 main {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    background-color: #292827;
+    min-height: 100vh;
+    background-color: #202C59;
 }
 
 header {
@@ -29,7 +36,7 @@ header {
 header>h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 125px;
-    color: #ffffff;
+    color: #FFF83F;
 }
 
 .splash-screen {
@@ -44,30 +51,43 @@ header>h1 {
     align-items: center;
     z-index: 9999;
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease;
 }
 
 .splash-content {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 150px;
     color: #292827;
-    animation: circle 5s linear;
-}
-
-@keyframes circle {
-    0% {
-        transform: scale(0.8);
-
-    }
-
-    100% {
-        transform: scale(1.5);
-    }
+    animation: splash 5s linear;
 }
 
 button {
-    padding: 0.2em 0.6em;
+    padding: 0.6em 1.2em;
     margin: 0.2em;
+    font-family: 'Bebas Neue', 'sans-serif';
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.5);
+    transition: 0.4s ease-in-out;
+}
+
+button:focus {
+    color: #F18805;
+    transform: scale(1.5);
+}
+
+input {
+    border: none;
+    font-size: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    border-radius: 0.2em;
+    padding: 0.3em 0.6em;
+    text-align: center;
 }
 
 canvas {
@@ -76,4 +96,35 @@ canvas {
     align-items: center;
     width: 80%;
     height: 300px;
+}
+
+
+.text {
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.text {
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.tooltip {
+    z-index: 0;
+}
+
+.tooltip:hover {
+    z-index: 999;
+}
+
+@keyframes splash {
+    0% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
 }

@@ -1,11 +1,10 @@
 import './App.css'
-import SpecialsByLanguage from './components/SpecialsByLanguage'
-import DocumentariesByLanguage from './components/DocumentariesByLanguage'
-import FeaturesByLanguage from './components/FeaturesByLanguage'
 import MoviesByMonth from './components/MoviesByMonth'
 import MoviesByRuntime from './components/MoviesByRuntime'
 import MoviesByGenre from './components/MoviesByGenre'
 import MoviesBySearch from './components/Search'
+import MoviesByLanguage from './components/MoviesByLanguage'
+import 'remixicon/fonts/remixicon.css'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -16,12 +15,8 @@ function App() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'specials':
-        return <SpecialsByLanguage />
-      case 'documentaries':
-        return <DocumentariesByLanguage />
-      case 'features':
-        return <FeaturesByLanguage />
+      case 'language':
+        return <MoviesByLanguage />
       case 'genre':
         return <MoviesByGenre />
       case 'month':
@@ -51,8 +46,8 @@ function App() {
 
   return (
     <>
-      <main>
-        {splashScreenVisible && ( // Render splash screen conditionally
+    <main>
+    {splashScreenVisible && ( // Render splash screen conditionally
           <div className="splash-screen" id="splash-screen">
             <div className="splash-content">
               MovieStats
@@ -65,19 +60,16 @@ function App() {
           </h1>
         </header>
         <div className="component-buttons">
-          <button onClick={() => setActiveComponent('search')}>Search</button>
-          <button onClick={() => setActiveComponent('specials')}>Specials</button>
-          <button onClick={() => setActiveComponent('documentaries')}>Documentaries</button>
-          <button onClick={() => setActiveComponent('features')}>Features</button>
-          <button onClick={() => setActiveComponent('genre')}>Genre</button>
-          <button onClick={() => setActiveComponent('month')}>Month</button>
-          <button onClick={() => setActiveComponent('runtime')}>Runtime</button>
+          <button title='Search' onClick={() => setActiveComponent('search')}><i className="ri-search-line"></i></button>
+          <button title='Language' onClick={() => setActiveComponent('language')}><i className="ri-translate-2"></i>
+          </button>
+          <button title='Genre' onClick={() => setActiveComponent('genre')}><i className="ri-movie-2-line"></i></button>
+          <button title='Premiere' onClick={() => setActiveComponent('month')}><i className="ri-calendar-2-line"></i></button>
+          <button title='Runtime' onClick={() => setActiveComponent('runtime')}><i className="ri-time-line"></i></button>
         </div>
-        <section className='render-section'>
           {renderComponent()}
-        </section>
       </main>
-    </>
+        </>
   )
 }
 

@@ -2,11 +2,11 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, LinearScale,
 import { Line } from 'react-chartjs-2'
 ChartJS.register(Tooltip, Legend, PointElement, LineElement);
 
-import documentariesData from "../data/documentaries.json"
-import specialsData from "../data/specials.json"
-import featureData from "../data/feature-films.json"
+import documentariesData from "../data/json/documentaries.json"
+import specialsData from "../data/json/specials.json"
+import featureData from "../data/json/feature-films.json"
 
-import { getRuntimeConfig } from '../data/getAll';
+import { getRuntimeConfig } from '../data/getRuntime';
 
 
 

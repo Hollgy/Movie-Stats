@@ -1,10 +1,10 @@
 // JS fil för funktioner som hämtar data från samtliga json filer, till skillnad från de tidigare genre specifika
 
 
-const colors = ['#F6EEE5', '#C0856B', '#801316', '#B69885', '#8FD89F', '#4C8E85', '#D45B5B', '#6DAB80', '#BCED91', '#E0AFA0', '#9A8EAB', '#F5C1BC', '#57A0D3', '#FFAA99', '#669966', '#CCFF99', '#FACC2E', '#996699', '#3399CC']
+const colors = ['#001219', '#005F73', '#0A9396', '#94D2BD', '#E9D8A6', '#EE9B00', '#CA6702', '#BB3E03', '#AE2012', '#9B2226', '#9A8EAB', '#F5C1BC', '#57A0D3', '#FFAA99', '#669966', '#CCFF99', '#FACC2E', '#996699', '#3399CC']
 
 
-
+// Bar chart för premiärer
 // funktion för att hämta releaser i månatligt format
 export function getMonthConfig(documentaries, specials, featureFilms) {
     const allData = [...documentaries, ...specials, ...featureFilms]
@@ -14,9 +14,7 @@ export function getMonthConfig(documentaries, specials, featureFilms) {
 
     allData.forEach(movie => {
         const premiere = new Date(movie.Premiere)
-        const month = premiere.getMonth(
-
-        )
+        const month = premiere.getMonth()
         if (premiereCount[month]) {
             premiereCount[month]++
         } else {
@@ -24,9 +22,9 @@ export function getMonthConfig(documentaries, specials, featureFilms) {
         }
     })
 
+
     const uniqueMonth = Object.keys(premiereCount).map(month => Number(month))
     const monthCountsArray = uniqueMonth.map(month => premiereCount[month])
-    monthCountsArray.sort((a, b) => b - a)
 
 
     return {
@@ -34,95 +32,74 @@ export function getMonthConfig(documentaries, specials, featureFilms) {
         datasets: [{
             label: 'Movies by premier month',
             data: monthCountsArray,
-            backgroundColor: colors
-        }]
-    }
-}
-
-export function getRuntimeConfig(documentaries, specials, featureFilms) {
-    const allData = [...documentaries, ...specials, ...featureFilms]
-    // console.log('All movie data runtime', allData);
-
-    const runtimeCount = []
-
-    allData.forEach(movie => {
-        const runtime = movie.Runtime
-        if (runtimeCount[runtime]) {
-            runtimeCount[runtime]++
-        } else {
-            runtimeCount[runtime] = 1
+            backgroundColor: colors,
         }
-    })
-
-    const uniqueRuntime = Object.keys(runtimeCount)
-    const runtimeCountsArray = uniqueRuntime.map(runtime => runtimeCount[runtime])
-    
-    
-
-    return {
-        labels: uniqueRuntime,
-        datasets: [{
-            label: 'All movies by runtime',
-            data: runtimeCountsArray,
-            backgroundColor: colors
-        }]
+        ]
     }
 }
 
-export function getGenreConfig(documentaries, specials, featureFilms) {
-    const allData = [...documentaries, ...specials, ...featureFilms]
-    // console.log('All movie data runtime', allData);
 
-    const genreCount = []
+
+//BAR chart för genre
+export function getGenreConfig(documentaries, specials, featureFilms) {
+    const allData = [...documentaries, ...specials, ...featureFilms];
+
+    const genreCount = {};
+    // console.log(genreCount);
 
     allData.forEach(movie => {
-        let genre = movie.Genre
-        // TODO Se nedanför!
+        let genre = movie.Genre;
         if (!genre) {
             genre = "Documentary";
         }
-        if (genre.includes('comedy')) {
-            genre = "Comedy"
+
+        // mappa ihop subgenre till större genre
+        const genreMap = {
+            'comedy': 'Comedy',
+            'thriller': 'Thriller',
+            'action': 'Action',
+            'drama': 'Drama',
+            'mystery': 'Mystery',
+            'animation': 'Animated', 
+            'animated': 'Animated', 
+        };
+
+        for (const keyword in genreMap) {
+            if (genre.includes(keyword)) {
+                genre = genreMap[keyword];
+                break; 
+            }
         }
-        if (genre.includes('thriller')) {
-            genre = "Thriller"
-        }
-        if (genre.includes('action')) {
-            genre = "Action"
-        }
-        if (genre.includes('drama')) {
-            genre = "Drama"
-        }
-        if (genre.includes('mystery')) {
-            genre = "Mystery"
-        }
-        if (genre.includes('animation' && 'animated')) {
-            genre = "Animated"
-        }
-        //TODO check if necessary to reduce amount of genres, alt. make another pie for lesser amounts
+
         if (genreCount[genre]) {
-            genreCount[genre]++
+            genreCount[genre]++;
         } else {
-            genreCount[genre] = 1
+            genreCount[genre] = 1;
         }
+    });
 
-    })
 
-    const uniqueGenre = Object.keys(genreCount)
-    const genreCountsArray = uniqueGenre.map(genre => genreCount[genre])
-    genreCountsArray.sort((a, b) => b - a)
-    
+    const genreCountArray = Object.entries(genreCount)
+        .map(([genre, count]) => ({ genre, count }));
+
+    genreCountArray.sort((a, b) => b.count - a.count);
+    //stortera i mängdordning av genre
+
+    const labels = genreCountArray.map(item => item.genre);
+    const data = genreCountArray.map(item => item.count);
 
     return {
-        labels: uniqueGenre,
+        labels: labels,
         datasets: [{
             label: 'All movies by Genre',
-            data: genreCountsArray,
+            data: data,
             backgroundColor: colors
         }]
-    }
+    };
 }
 
+
+//Sökconfig
 export function searchConfig(documentaries, specials, featureFilms, searchTerm) {
     const allData = [...documentaries, ...specials, ...featureFilms];
     console.log('All movie search data', allData);
