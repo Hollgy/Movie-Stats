@@ -60,6 +60,7 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
     const uniqueSpecialRuntime = Object.keys(specialRuntimeCount);
     const specialRuntimeCountsArray = uniqueSpecialRuntime.map((specialRuntime) => specialRuntimeCount[specialRuntime]);
 
+    console.log(specialRuntimeCount);
     return {
         labels: uniqueRuntime,
         datasets: [
@@ -67,7 +68,7 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
                 label: 'All movies by runtime',
                 data: runtimeCountsArray,
                 backgroundColor: 'green',
-                borderColor: '#8cb4f5',
+                borderColor: '#8cf59d',
                 lineTension: 0.8,
                 hitRadius: 30,
                 hoverRadius: 8,
@@ -76,7 +77,7 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
                 label: 'Documentaries by runtime',
                 data: docuRuntimeCountsArray,
                 backgroundColor: 'blue',
-                borderColor: '#88f7b5',
+                borderColor: '#8ca5f5',
                 pointRadius: 2,
                 borderWidth: 2,
                 lineTension: 0.8,
