@@ -60,24 +60,25 @@ function App() {
               transition={{ duration: 1.2, delay: 1 }}
             >
               <motion.h1
-                initial={{scale: 1,}}
-                animate={{scale: 0.5}}
-
+                initial={{scale: 0.8,}}
+                animate={{scale: 0.3, opacity: 0}}
+                transition={{duration: 2, delay:0.4}}
               >
                 MovieStats
               </motion.h1>
             </motion.div>
           </motion.div>
         )}
+        {/* motion för splashscreen, övre med scale är första, spring är headern */}
         <header>
           <motion.h1
             initial={{ y: 80 }}
             animate={{ y: 0 }}
-            transition={{ delay: 1.3, duration: 1.3, type: 'spring' }}
+            transition={{ delay: 1.3, duration: 1.3, type: 'spring', stiffness:110 }}
           >
             Movie Stats
           </motion.h1>
-        </header>
+        </header> 
         <div className="component-buttons">
           <button title='Search' onClick={() => setActiveComponent('search')}><i className="ri-search-line"></i></button>
           <button title='Language' onClick={() => setActiveComponent('language')}><i className="ri-translate-2"></i>

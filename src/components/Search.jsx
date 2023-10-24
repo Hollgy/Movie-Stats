@@ -24,7 +24,9 @@ const MoviesBySearch = () => {
         handleSearch();
     };
 
+// animation för enstaka film adderad, bör finslipas, samt animering för komplett lista saknas.
 
+// Fixa animering för samtliga komponenter och fixa labels med
 
     return (
         <section>
