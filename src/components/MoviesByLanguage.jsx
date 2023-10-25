@@ -10,13 +10,28 @@ const documentariesConfig = getDocumentariesConfig()
 const FFConfig = getFFConfig()
 const specialConfig = getSpecialsConfig()
 
+const optionsFF = {
+    plugins: {
+        title:{
+            display: true,
+            text: 'Feature-Films',
+            font: {
+                size: 18
+            }
+        },
+        legends: {
+            display: false
+        }
+    }
+}
+
 const MoviesByLanguage = () => {
     return(
         <section>
             <h2>Specials by Language</h2>
             <Pie data={specialConfig} />
             <h2>Feature-Films by Language</h2>
-            <Pie data={FFConfig} />
+            <Pie data={FFConfig} options={optionsFF} />
             <h2>Documentaries by Language</h2>
             <Pie data={documentariesConfig} />
         </section>

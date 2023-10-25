@@ -10,9 +10,6 @@ import { delay, motion, spring } from "framer-motion"
 
 function App() {
   const [activeComponent, setActiveComponent] = useState('search')
-  const [splashScreenVisible, setSplashScreenVisible] = useState(true)
-
-
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -29,69 +26,56 @@ function App() {
         return <MoviesBySearch />
     }
   }
-  useEffect(() => {
-    setTimeout(() => {
-      setSplashScreenVisible(false);
-    }, 2000);
-  }, []);
 
-  window.addEventListener('load', () => {
-    const splashScreen = document.getElementById('splash-screen');
-    setTimeout(() => {
-      splashScreen.style.opacity = '0';
-      setTimeout(() => {
-        splashScreen.style.display = 'none';
-      }, 500); // fade 
-    }, 1100); //väntetid
-  });
 
+  const buttonHover = {
+    scale: 1.5,
+    transition: '0.4s ease-in-out;',
+    boxShadow: '#ffffff'
+  }
+
+  const buttonActive = {
+    color: '#F18805',
+    scale: 1.5,
+  }
   return (
     <>
       <main>
-        {splashScreenVisible && ( // Render splash screen conditionally
-          <motion.div className="splash-screen" id="splash-screen"
-            initial={{ opacity: 1, y: 50, width: '100vw', height: '100%', position: 'fixed' }}
-            animate={{ opacity: 0, y: '-100vh', width: '100vw', height: '100%', position: 'fixed' }}
-            transition={{ duration: 2, delay: 1 }}
-          >
-            <motion.div className="splash-content"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ duration: 1.2, delay: 1 }}
-            >
-              <motion.h1
-                initial={{scale: 0.8,}}
-                animate={{scale: 0.3, opacity: 0}}
-                transition={{duration: 2, delay:0.4}}
-              >
-                MovieStats
-              </motion.h1>
-            </motion.div>
-          </motion.div>
-        )}
-        {/* motion för splashscreen, övre med scale är första, spring är headern */}
         <header>
           <motion.h1
-            initial={{ y: 80 }}
+            initial={{ y: -280 }}
             animate={{ y: 0 }}
-            transition={{ delay: 1.3, duration: 1.3, type: 'spring', stiffness:110 }}
+            transition={{ delay: 0.8, type: 'spring', stiffness: 100 }}
           >
             Movie Stats
           </motion.h1>
-        </header> 
+          <hr style={{ width: '50vw', backgroundColorcolor: '#FFF83F' }} />
+        </header>
         <div className="component-buttons">
-          <button title='Search' onClick={() => setActiveComponent('search')}><i className="ri-search-line"></i></button>
-          <button title='Language' onClick={() => setActiveComponent('language')}><i className="ri-translate-2"></i>
-          </button>
-          <button title='Genre' onClick={() => setActiveComponent('genre')}><i className="ri-movie-2-line"></i></button>
-          <button title='Premiere' onClick={() => setActiveComponent('month')}><i className="ri-calendar-2-line"></i></button>
-          <button title='Runtime' onClick={() => setActiveComponent('runtime')}><i className="ri-time-line"></i></button>
+          <motion.button title='Search'
+            whileHover={buttonHover}
+            while={buttonActive}
+            onClick={() => setActiveComponent('search')}><motion.i
+              className="ri-search-line"></motion.i></motion.button>
+          <motion.button title='Language'
+            whileHover={buttonHover}
+            onClick={() => setActiveComponent('language')}><i className="ri-translate-2"></i>
+          </motion.button>
+          <motion.button title='Genre'
+            whileHover={buttonHover}
+            onClick={() => setActiveComponent('genre')}><i className="ri-movie-2-line"></i></motion.button>
+          <motion.button title='Premiere'
+            whileHover={buttonHover}
+            onClick={() => setActiveComponent('month')}><i className="ri-calendar-2-line"></i></motion.button>
+          <motion.button title='Runtime'
+            whileHover={buttonHover}
+            onClick={() => setActiveComponent('runtime')}><i className="ri-time-line"></i></motion.button>
         </div>
         <motion.section
-          className='render-section'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 1.7, duration: 1 }}
+          className='render-section'
         >
           {renderComponent()}
         </motion.section>

@@ -8,7 +8,7 @@ const colors = [
 
 
 export function getSpecialsConfig() {
-    
+
     const languagueCount = []
     // console.log('Specials movie data', languagueCount);
 
