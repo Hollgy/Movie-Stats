@@ -12,21 +12,16 @@ const specialConfig = getSpecialsConfig()
 
 const optionsFF = {
     plugins: {
-        title:{
+        title: {
             display: true,
             text: 'Feature-Films',
-            font: {
-                size: 18
-            }
-        },
-        legends: {
-            display: false
         }
     }
 }
 
+
 const MoviesByLanguage = () => {
-    return(
+    return (
         <section>
             <h2>Specials by Language</h2>
             <Pie data={specialConfig} />

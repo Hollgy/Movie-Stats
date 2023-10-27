@@ -60,7 +60,7 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
     const uniqueSpecialRuntime = Object.keys(specialRuntimeCount);
     const specialRuntimeCountsArray = uniqueSpecialRuntime.map((specialRuntime) => specialRuntimeCount[specialRuntime]);
 
-    console.log(specialRuntimeCount);
+    // console.log(specialRuntimeCount);
     return {
         labels: uniqueRuntime,
         datasets: [
@@ -72,6 +72,7 @@ export function getRuntimeConfig(documentaries, specials, featureFilms) {
                 lineTension: 0.8,
                 hitRadius: 30,
                 hoverRadius: 8,
+                
             },
             {
                 label: 'Documentaries by runtime',
